@@ -23,41 +23,39 @@ describe "markets API" do
 
       expect(response).to be_successful
 
-      markets = JSON.parse(response.body, symbolize_names: true)
-require 'pry'; binding.pry
+      markets = JSON.parse(response.body, symbolize_names: true)[:data]
+      
       markets.each do |market|
         expect(market).to have_key(:id)
-        expect(market[:id]).to be_an(Integer)
-
-        expect(market).to have_key(:name)
-        expect(market[:name]).to be_a(String)
-
-        expect(market).to have_key(:street)
-        expect(market[:street]).to be_a(String)
-
-        expect(market).to have_key(:city)
-        expect(market[:city]).to be_a(String)
-
-        expect(market).to have_key(:county)
-        expect(market[:county]).to be_a(String)
-
-        expect(market).to have_key(:state)
-        expect(market[:state]).to be_an(String)
-
-        expect(market).to have_key(:zip)
-        expect(market[:zip]).to be_an(String)
-
-        expect(market).to have_key(:lat)
-        expect(market[:lat]).to be_an(String)
-
-        expect(market).to have_key(:lon)
-        expect(market[:lon]).to be_an(String)
-
-        expect(market).to have_key(:vendor_count)
-        expect(market[:vendor_count]).to be_an(Integer)
+        expect(market[:id]).to be(String)
+  
+        expect(market).to have_key(:type)
+        expect(market[:type]).to be(String)
+  
+        expect(market).to have_key(:attributes)
+        expect(market[:attributes]).to be(Hash)
       end
+
+      first_market = markets.first 
+
+      expect(first_market[:attributes][:name]).to eq(market1.name)
+      expect(first_market[:attributes][:street]).to eq(market1.street)
+      expect(first_market[:attributes][:city]).to eq(market1.city)
+      expect(first_market[:attributes][:county]).to eq(market1.county)
+      expect(first_market[:attributes][:state]).to eq(market1.state)
+      expect(first_market[:attributes][:zip]).to eq(market1.zip)
+      expect(first_market[:attributes][:lat]).to eq(market1.lat)
+      expect(first_market[:attributes][:lon]).to eq(market1.lon)
+      expect(first_market[:attributes][:vendor_count]).to eq(market1.vendor_count)
     end
   end
+
+  describe "show" do 
+    xit "can send one market" do 
+      # ...
+    end
+  end
+  
 end
 
 
