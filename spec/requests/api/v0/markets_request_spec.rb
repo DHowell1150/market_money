@@ -27,13 +27,13 @@ describe "markets API" do
       
       markets.each do |market|
         expect(market).to have_key(:id)
-        expect(market[:id]).to be(String)
+        expect(market[:id]).to be_a(String)
   
         expect(market).to have_key(:type)
-        expect(market[:type]).to be(String)
+        expect(market[:type]).to be_a(String)
   
         expect(market).to have_key(:attributes)
-        expect(market[:attributes]).to be(Hash)
+        expect(market[:attributes]).to be_a(Hash)
       end
 
       first_market = markets.first 
@@ -46,7 +46,7 @@ describe "markets API" do
       expect(first_market[:attributes][:zip]).to eq(market1.zip)
       expect(first_market[:attributes][:lat]).to eq(market1.lat)
       expect(first_market[:attributes][:lon]).to eq(market1.lon)
-      expect(first_market[:attributes][:vendor_count]).to eq(market1.vendor_count)
+      expect(first_market[:attributes][:vendor_count]).to eq(market1.count_vendors)
     end
   end
 
