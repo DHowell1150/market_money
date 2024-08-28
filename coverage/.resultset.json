@@ -190,14 +190,14 @@
         "lines": [
           1,
           1,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
-          4,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
           null,
           null
         ]
@@ -206,11 +206,11 @@
         "lines": [
           1,
           1,
-          6,
-          6,
-          6,
-          6,
-          6,
+          1,
+          1,
+          1,
+          1,
+          1,
           null,
           null
         ]
@@ -235,18 +235,42 @@
           null
         ]
       },
-      "/Users/corybretsch/turing/mod_3/projects/market_money/app/models/vendor.rb": {
+      "/Users/corybretsch/turing/mod_3/projects/market_money/app/controllers/api/v0/markets_controller.rb": {
         "lines": [
           1,
           1,
+          1,
+          0,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/corybretsch/turing/mod_3/projects/market_money/app/controllers/application_controller.rb": {
+        "lines": [
           1,
           null
         ]
       },
-      "/Users/corybretsch/turing/mod_3/projects/market_money/app/models/application_record.rb": {
+      "/Users/corybretsch/turing/mod_3/projects/market_money/app/serializers/market_serializer.rb": {
         "lines": [
           1,
           1,
+          1,
+          null,
+          1,
+          0,
+          null,
           null
         ]
       },
@@ -262,30 +286,45 @@
           null
         ]
       },
-      "/Users/corybretsch/turing/mod_3/projects/market_money/app/models/market_vendor.rb": {
+      "/Users/corybretsch/turing/mod_3/projects/market_money/app/models/application_record.rb": {
         "lines": [
-          1,
           1,
           1,
           null
         ]
       },
-      "/Users/corybretsch/turing/mod_3/projects/market_money/app/controllers/api/v0/markets_controller.rb": {
+      "/Users/corybretsch/turing/mod_3/projects/market_money/app/serializers/error_serializer.rb": {
         "lines": [
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/corybretsch/turing/mod_3/projects/market_money/app/poros/error_message.rb": {
+        "lines": [
+          1,
+          1,
+          null,
           1,
           1,
           1,
           null,
           null
         ]
-      },
-      "/Users/corybretsch/turing/mod_3/projects/market_money/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          null
-        ]
       }
     },
-    "timestamp": 1724800025
+    "timestamp": 1724809432
   }
 }
