@@ -15,9 +15,8 @@ describe "Vendors API" do
         MarketVendor.create!(market: market3, vendor: vendor1)
 
         get "/api/v0/vendors/#{vendor1.id}"
-
         expect(response).to be_successful
-
+        
         vendor = JSON.parse(response.body, symbolize_names: true)[:data]
 
           expect(vendor).to have_key(:id)
@@ -47,17 +46,15 @@ describe "Vendors API" do
     end
     describe 'SAD PATHS' do 
       it "sends a 404 status and description for invalid vendor" do # js: false do 
-        vendor1 = create(:vendor, id: 99999999)
-        market1 = create(:market)
+        get "/api/v0/vendors/123123123123"
 
-        MarketVendor.create!(market: market1, vendor: vendor1)
+        expect(response).to_not be_successful
+        expect(response.status).to eq(404)
 
-        get "/api/v0/vendors/#{vendor1.id}"
-
-        expect(response).to be_unsuccessful
-        expect(page.status_code).to eq(404)
-        response = JSON.parse(response.body, symbolize_names: true)[:errors]
-require 'pry' ; binding.pry
+        data = JSON.parse(response.body, symbolize_names: true)[:errors]
+        
+        expect(data).to be_a(Array)
+        expect(data.first[:detail]).to eq("Couldn't find Vendor with 'id'=123123123123")
       end
     end
   end

@@ -190,14 +190,14 @@
         "lines": [
           1,
           1,
-          11,
-          11,
-          11,
-          11,
-          11,
-          11,
-          11,
-          11,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
           null,
           null
         ]
@@ -206,11 +206,11 @@
         "lines": [
           1,
           1,
-          13,
-          13,
-          13,
-          13,
-          13,
+          12,
+          12,
+          12,
+          12,
+          12,
           null,
           null
         ]
@@ -255,7 +255,6 @@
           1,
           null,
           1,
-          null,
           1,
           null,
           1,
@@ -288,16 +287,14 @@
           1,
           1,
           1,
+          null,
+          1,
           1,
           null,
           1,
           null,
           1,
-          null,
           1,
-          0,
-          0,
-          0,
           null,
           null,
           null,
@@ -402,12 +399,12 @@
         "lines": [
           1,
           1,
-          1,
+          2,
           null,
           null,
           1,
           null,
-          1,
+          2,
           null,
           null,
           null,
@@ -423,8 +420,8 @@
           1,
           null,
           1,
-          1,
-          1,
+          2,
+          2,
           null,
           null
         ]
@@ -433,7 +430,21 @@
         "lines": [
           1,
           1,
+          null,
           2,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null
         ]
@@ -447,6 +458,6 @@
         ]
       }
     },
-    "timestamp": 1724812411
+    "timestamp": 1724857765
   }
 }
