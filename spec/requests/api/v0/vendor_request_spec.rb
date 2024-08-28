@@ -18,9 +18,7 @@ describe "Vendors API" do
 
         expect(response).to be_successful
 
-        vendors = JSON.parse(response.body, symbolize_names: true)[:data]
-
-        vendor = vendors.first
+        vendor = JSON.parse(response.body, symbolize_names: true)[:data]
 
           expect(vendor).to have_key(:id)
           expect(vendor[:id]).to be_a(String)
@@ -48,7 +46,7 @@ describe "Vendors API" do
       end
     end
     describe 'SAD PATHS' do 
-      xit "sends a 404 status and description for invalid vendor" do # js: false do 
+      it "sends a 404 status and description for invalid vendor" do # js: false do 
         vendor1 = create(:vendor, id: 99999999)
         market1 = create(:market)
 
