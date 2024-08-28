@@ -62,8 +62,22 @@ describe "Vendors API" do
   describe "create" do 
     describe "happy paths" do 
       it "creates a vendor" do 
+        vendor_attrs = ({
+          name: "Some Name",
+          description: "Some description that is longer",
+          contact_name: "Contact Name",
+          contact_phone: 888-888-8888,
+          credit_accepted: true
+        })
+        headers = {"CONTENT_TYPE" => "application/json"}
 
+        post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_attrs)
+
+        expect(response).to be_successful
+
+        vendor = JSON.parse(response.body, symbolize_names: true)[:data]
       end
+
     describe "sad paths" do
       it "something" do
 

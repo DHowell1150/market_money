@@ -7,6 +7,10 @@ class Api::V0::VendorsController < ApplicationController
       .serialize_json, status: :not_found
     end
   end
+
+  def create
+    render json: VendorSerializer.new(Vendor.find(params[:vendor]))
+  end
 end
 
 # render json: {
