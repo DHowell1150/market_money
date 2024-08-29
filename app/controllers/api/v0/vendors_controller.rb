@@ -10,34 +10,16 @@ class Api::V0::VendorsController < ApplicationController
       render json: VendorSerializer.new(Vendor.find(params[:id]))
   end
 
-  def update
-    vendor = Vendor.find(params[:vendor])
-    vendor.update(vendor_params)
-    render json: VendorSerializer.new(vendor)
-  end
-
   def create
-    begin
-      vendor = Vendor.new(vendor_params)
-      if vendor.save
-        render json: VendorSerializer.new(vendor)
-      else #rescue ActiveRecord::RecordNotFound => exception
-        render json: ErrorSerializer.new(ErrorMessage.new(exception.message, 400))
-        .serialize_json, status_code: :bad_request
-      end
+    vendor = Vendor.new(vendor_params)
+
+    begin vendor.save!
+      render json: VendorSerializer.new(vendor)
+    rescue ActiveRecord::RecordInvalid => exception
+      render json: ErrorSerializer.new(ErrorMessage.new(exception.message, "422"))
+      .serialize_json, status: 422
     end
   end
-
-  #   vendor = Vendor.new(vendor_params)
-  #   require 'pry' ; binding.pry
-  #   begin
-  #     render json: VendorSerializer.new(vendor)
-  #   rescue ActiveRecord::RecordNotFound => exception
-  #     require 'pry' ; binding.pry
-  #     render json: ErrorSerializer.new(ErrorMessage.new(exception.message, 404))
-  #     .serialize_json, status: :bad_request
-  #   end
-  # end
 
   private
 

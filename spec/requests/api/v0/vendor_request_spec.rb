@@ -146,29 +146,29 @@ describe "Vendors API" do
         expect(vendor[:attributes]).to have_key(:credit_accepted)
         expect(vendor[:attributes][:credit_accepted]).to eq(true)
       end
-
+    end
     describe "sad paths" do
-      xit "must have a name" do
+      it "must have a name" do
         vendor_attrs = ({
           name: "",
           description: "Some description that is longer",
           contact_name: "Contact Name",
           contact_phone: 888-888-8888,
-          credit_accepted: true
+          credit_accepted: false
         })
         headers = {"CONTENT_TYPE" => "application/json"}
 
         post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_attrs) 
         
         expect(response).to_not be_successful
-        expect(response.status).to eq(400)
+        expect(response.status).to eq(422)
 
         data = JSON.parse(response.body, symbolize_names: true)[:errors]
         expect(data).to be_a(Array)
-        expect(data.first[:detail]).to eq("Validation failed: Contact name can't be blank")
+        expect(data.first[:detail]).to eq("Validation failed: Name can't be blank")
       end
 
-      xit "must have a contact_name" do # js: false do 
+      xit "must have a contact_name" do 
         vendor_attrs = ({
           name: "Some Name",
           description: "Some description that is longer",
@@ -187,28 +187,6 @@ describe "Vendors API" do
         
         expect(data).to be_a(Array)
         expect(data.first[:detail]).to eq("Validation failed: Contact name can't be blank")
-      end
-    end
-
-    end
-
-    describe "update" do 
-      describe "happy paths" do 
-        it "can update a vendor" do
-          id = create(:vendor).id
-          previous_name = Vendor.last.name
-          vendor_params = { name: "Tabula Rasa" }
-          headers = { "CONTENT_TYPE" => "application/json" }
-          # We include this header to make sure that these params are passed as JSON rather than as plain text
-  
-          patch "/api/v0/vendors/#{id}", headers: headers, params: JSON.generate({vendor: vendor_params})
-  
-          vendor = Vendor.find_by(id: id)
-          require 'pry' ; binding.pry
-          expect(response).to be_successful
-          expect(vendor.name).to_not eq(previous_name)
-          expect(vendor.name).to eq("Tabula Rasa")
-        end
       end
     end
   end
