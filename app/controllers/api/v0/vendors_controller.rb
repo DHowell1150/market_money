@@ -1,30 +1,34 @@
 class Api::V0::VendorsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found_response
 
   def index 
-    begin
       market = Market.find(params[:market_id])
       render json: VendorSerializer.new(market.vendors)
-    rescue ActiveRecord::RecordNotFound => exception
-      render json: ErrorSerializer.new(ErrorMessage.new(exception.message, 404))
-      .serialize_json, status: :not_found
-    end
   end
 
   def show
-    begin
       render json: VendorSerializer.new(Vendor.find(params[:id]))
-    rescue ActiveRecord::RecordNotFound => exception
-      render json: ErrorSerializer.new(ErrorMessage.new(exception.message, 404))
-      .serialize_json, status: :not_found
+  end
+
+  def create
+    vendor = Vendor.new(vendor_params)
+
+    begin vendor.save!
+      render json: VendorSerializer.new(vendor)
+    rescue ActiveRecord::RecordInvalid => exception
+      render json: ErrorSerializer.new(ErrorMessage.new(exception.message, "422"))
+      .serialize_json, status: 422
     end
   end
-end
 
-# render json: {
-#   errors: [
-#     {
-#       status: "404",
-#       title: exception.message
-#     }
-#   ]
-# }, status: :not_found
+  private
+
+  def not_found_response(exception)
+    render json: ErrorSerializer.new(ErrorMessage.new(exception.message, 404))
+      .serialize_json, status: :not_found
+  end
+
+  def vendor_params
+    params.require(:vendor).permit(:name, :description, :contact_name, :contact_phone, :credit_accepted)
+  end
+end
