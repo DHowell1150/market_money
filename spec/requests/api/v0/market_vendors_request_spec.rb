@@ -17,11 +17,23 @@ describe "market_vendors request" do
       expect(market1.vendors.count).to eq(2)
 
       post "/api/v0/market_vendors", headers: headers, params: JSON.generate(market_vendor_params: market_vendor_params)
-      created_market_vendor = MarketVendor.last 
+      expect(response).to be_successful
+      require 'pry'; binding.pry
+      message = JSON.parse(response.body, symbolize_names: true)
 
+      # additional assertions... not sure if they are needed
+      created_market_vendor = MarketVendor.last 
+      added_vendor = market1.vendors.last
       expect(created_market_vendor.market_id).to eq(market1.id)
       expect(created_market_vendor.vendor_id).to eq(vendor3.id)
+      expect(market1.vendors.count).to eq(3)
+      expect(added_vendor.id).to eq(vendor3.id)
+    end
+  end
 
+  describe "sad path 1" do 
+    it "can" do 
+      
     end
   end
 end
