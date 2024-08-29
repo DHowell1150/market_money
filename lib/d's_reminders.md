@@ -1,6 +1,15 @@
-- VENDOR CREATE
+- VENDOR UPDATE
   - Request_spec 
     - Happy paths passing
+
+
+
+
+
+
+
+
+    
     - sad paths not passing, commented out
   - Create Controller action   
 
