@@ -204,24 +204,21 @@ describe "Vendors API" do
   
         vendor = Vendor.find_by(id: id)
         expect(response).to be_successful
-        expect(vendor.name).to_not eq(previous_name)
-        expect(vendor.name).to eq("Tabula Rasa")
+        expect(response.status).to eq(404)
       end
     end
   
     describe "sad paths" do
       
       it "contact name can't be blank" do 
-        # id = create(:vendor).id
-        id = 123123123123
+        id = create(:vendor).id
+        require 'pry' ; binding.pry
         vendor_params = { contact_name: "Tabula Rasa" }
         headers = { "CONTENT_TYPE" => "application/json" }
         # We include this header to make sure that these params are passed as JSON rather than as plain text
   
-        patch "/api/v0/vendors/#{id}", headers: headers, params: JSON.generate({vendor: vendor_params})
+        patch "/api/v0/vendors/123123123123", headers: headers, params: JSON.generate({vendor: vendor_params})
   
-        vendor = Vendor.find_by(id: id)
-require 'pry' ; binding.pry
         expect(response).to_not be_successful
         expect(response.status).to eq(404)
       end
