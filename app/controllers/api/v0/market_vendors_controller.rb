@@ -8,3 +8,4 @@ class Api::V0::MarketVendorsController < ApplicationController
       render json: MarketVendorSerializer.new(creation)
   end
 end
+end
