@@ -118,7 +118,7 @@ describe "Vendors API" do
           name: "Some Name",
           description: "Some description that is longer",
           contact_name: "Contact Name",
-          contact_phone: 888-888-8888,
+          contact_phone: "888-888-8888",
           credit_accepted: true
         })
         headers = {"CONTENT_TYPE" => "application/json"}
@@ -128,6 +128,23 @@ describe "Vendors API" do
         expect(response).to be_successful
 
         vendor = JSON.parse(response.body, symbolize_names: true)[:data]
+        expect(vendor).to have_key(:id)
+        expect(vendor[:id]).to be_a(String)
+        expect(vendor).to have_key(:type)
+        expect(vendor[:type]).to eq("vendor")
+        expect(vendor).to have_key(:attributes)
+        expect(vendor[:attributes]).to be_a(Hash)
+        
+        expect(vendor[:attributes]).to have_key(:name)
+        expect(vendor[:attributes][:name]).to eq("Some Name")
+        expect(vendor[:attributes]).to have_key(:description)
+        expect(vendor[:attributes][:description]).to eq("Some description that is longer")
+        expect(vendor[:attributes]).to have_key(:contact_name)
+        expect(vendor[:attributes][:contact_name]).to eq("Contact Name")
+        expect(vendor[:attributes]).to have_key(:contact_phone)
+        expect(vendor[:attributes][:contact_phone]).to eq("888-888-8888")
+        expect(vendor[:attributes]).to have_key(:credit_accepted)
+        expect(vendor[:attributes][:credit_accepted]).to eq(true)
       end
 
     describe "sad paths" do
@@ -173,7 +190,19 @@ describe "Vendors API" do
       end
     end
       it "can update a vendor" do
-        
+        id = create(:vendor).id
+        previous_name = Vendor.last.name
+        vendor_params = { name: "Tabula Rasa" }
+        headers = { "CONTENT_TYPE" => "application/json" }
+        # We include this header to make sure that these params are passed as JSON rather than as plain text
+
+        patch "/api/v0/vendors/#{id}", headers: headers, params: JSON.generate({vendor: vendor_params})
+
+        vendor = Vendor.find_by(id: id)
+        require 'pry' ; binding.pry
+        expect(response).to be_successful
+        expect(vendor.name).to_not eq(previous_name)
+        expect(vendor.name).to eq("Tabula Rasa")
       end
 
       it "can delete a vendor" do
