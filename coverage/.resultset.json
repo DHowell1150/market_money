@@ -190,14 +190,14 @@
         "lines": [
           1,
           1,
-          10,
-          10,
-          10,
-          10,
-          10,
-          10,
-          10,
-          10,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
           null,
           null
         ]
@@ -206,11 +206,11 @@
         "lines": [
           1,
           1,
-          12,
-          12,
-          12,
-          12,
-          12,
+          4,
+          4,
+          4,
+          4,
+          4,
           null,
           null
         ]
@@ -231,90 +231,7 @@
           1,
           1,
           1,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/danahowell/turing/3.5mod/projects/market_money/spec/requests/api/v0/vendor_request_spec.rb": {
-        "lines": [
           1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          1,
-          null,
           null,
           null,
           null,
@@ -324,6 +241,9 @@
       "/Users/danahowell/turing/3.5mod/projects/market_money/app/models/vendor.rb": {
         "lines": [
           1,
+          null,
+          null,
+          null,
           1,
           1,
           null
@@ -343,7 +263,7 @@
           1,
           null,
           1,
-          6,
+          0,
           null,
           null
         ]
@@ -356,12 +276,19 @@
           null
         ]
       },
-      "/Users/danahowell/turing/3.5mod/projects/market_money/app/controllers/api/v0/markets_controller.rb": {
+      "/Users/danahowell/turing/3.5mod/projects/market_money/app/controllers/api/v0/vendors_controller.rb": {
         "lines": [
           1,
           1,
+          null,
           1,
+          null,
+          2,
           1,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           1,
@@ -372,7 +299,34 @@
           null,
           1,
           1,
+          1,
           null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null,
+          1,
+          1,
           null,
           null
         ]
@@ -383,15 +337,11 @@
           null
         ]
       },
-      "/Users/danahowell/turing/3.5mod/projects/market_money/app/serializers/market_serializer.rb": {
+      "/Users/danahowell/turing/3.5mod/projects/market_money/app/serializers/vendor_serializer.rb": {
         "lines": [
           1,
           1,
           1,
-          null,
-          1,
-          4,
-          null,
           null
         ]
       },
@@ -425,39 +375,8 @@
           null,
           null
         ]
-      },
-      "/Users/danahowell/turing/3.5mod/projects/market_money/app/controllers/api/v0/vendors_controller.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          2,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/danahowell/turing/3.5mod/projects/market_money/app/serializers/vendor_serializer.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null
-        ]
       }
     },
-    "timestamp": 1724857765
+    "timestamp": 1724895260
   }
 }
