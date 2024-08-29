@@ -189,24 +189,26 @@ describe "Vendors API" do
         expect(data.first[:detail]).to eq("Validation failed: Contact name can't be blank")
       end
     end
-      it "can update a vendor" do
-        id = create(:vendor).id
-        previous_name = Vendor.last.name
-        vendor_params = { name: "Tabula Rasa" }
-        headers = { "CONTENT_TYPE" => "application/json" }
-        # We include this header to make sure that these params are passed as JSON rather than as plain text
 
-        patch "/api/v0/vendors/#{id}", headers: headers, params: JSON.generate({vendor: vendor_params})
+    end
 
-        vendor = Vendor.find_by(id: id)
-        require 'pry' ; binding.pry
-        expect(response).to be_successful
-        expect(vendor.name).to_not eq(previous_name)
-        expect(vendor.name).to eq("Tabula Rasa")
-      end
-
-      it "can delete a vendor" do
-
+    describe "update" do 
+      describe "happy paths" do 
+        it "can update a vendor" do
+          id = create(:vendor).id
+          previous_name = Vendor.last.name
+          vendor_params = { name: "Tabula Rasa" }
+          headers = { "CONTENT_TYPE" => "application/json" }
+          # We include this header to make sure that these params are passed as JSON rather than as plain text
+  
+          patch "/api/v0/vendors/#{id}", headers: headers, params: JSON.generate({vendor: vendor_params})
+  
+          vendor = Vendor.find_by(id: id)
+          require 'pry' ; binding.pry
+          expect(response).to be_successful
+          expect(vendor.name).to_not eq(previous_name)
+          expect(vendor.name).to eq("Tabula Rasa")
+        end
       end
     end
   end
