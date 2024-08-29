@@ -114,19 +114,79 @@ describe "Vendors API" do
   describe "create" do 
     describe "happy paths" do 
       it "creates a vendor" do 
+        vendor_attrs = ({
+          name: "Some Name",
+          description: "Some description that is longer",
+          contact_name: "Contact Name",
+          contact_phone: "888-888-8888",
+          credit_accepted: true
+        })
+        headers = {"CONTENT_TYPE" => "application/json"}
 
-      end
-    describe "sad paths" do
-      it "something" do
+        post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_attrs)
 
+        expect(response).to be_successful
+
+        vendor = JSON.parse(response.body, symbolize_names: true)[:data]
+        expect(vendor).to have_key(:id)
+        expect(vendor[:id]).to be_a(String)
+        expect(vendor).to have_key(:type)
+        expect(vendor[:type]).to eq("vendor")
+        expect(vendor).to have_key(:attributes)
+        expect(vendor[:attributes]).to be_a(Hash)
+        
+        expect(vendor[:attributes]).to have_key(:name)
+        expect(vendor[:attributes][:name]).to eq("Some Name")
+        expect(vendor[:attributes]).to have_key(:description)
+        expect(vendor[:attributes][:description]).to eq("Some description that is longer")
+        expect(vendor[:attributes]).to have_key(:contact_name)
+        expect(vendor[:attributes][:contact_name]).to eq("Contact Name")
+        expect(vendor[:attributes]).to have_key(:contact_phone)
+        expect(vendor[:attributes][:contact_phone]).to eq("888-888-8888")
+        expect(vendor[:attributes]).to have_key(:credit_accepted)
+        expect(vendor[:attributes][:credit_accepted]).to eq(true)
       end
     end
-      it "can update a vendor" do
+    describe "sad paths" do
+      it "must have a name" do
+        vendor_attrs = ({
+          name: "",
+          description: "Some description that is longer",
+          contact_name: "Contact Name",
+          contact_phone: 888-888-8888,
+          credit_accepted: false
+        })
+        headers = {"CONTENT_TYPE" => "application/json"}
+
+        post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_attrs) 
         
+        expect(response).to_not be_successful
+        expect(response.status).to eq(422)
+
+        data = JSON.parse(response.body, symbolize_names: true)[:errors]
+        expect(data).to be_a(Array)
+        expect(data.first[:detail]).to eq("Validation failed: Name can't be blank")
       end
 
-      it "can delete a vendor" do
+      xit "must have a contact_name" do 
+        vendor_attrs = ({
+          name: "Some Name",
+          description: "Some description that is longer",
+          contact_name: "",
+          contact_phone: 888-888-8888,
+          credit_accepted: true
+        })
+        headers = {"CONTENT_TYPE" => "application/json"}
 
+        post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_attrs) 
+        
+        expect(response).to_not be_successful
+        expect(response.status).to eq(404)
+
+        data = JSON.parse(response.body, symbolize_names: true)[:errors]
+        
+        expect(data).to be_a(Array)
+        expect(data.first[:detail]).to eq("Validation failed: Contact name can't be blank")
       end
     end
   end
