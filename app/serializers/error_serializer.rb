@@ -12,4 +12,24 @@ class ErrorSerializer
       ]
     }
   end
+
+  def market_not_found 
+    {
+      errors: [
+          {
+              detail: "Validation failed: Market must exist"
+          }
+      ]
+    }
+  end
+
+  def market_vendor_exists(market, vendor)
+    {
+      errors: [
+          {
+              detail: "Validation failed: Market vendor asociation between market with market_id=#{market} and vendor_id=#{vendor} already exists"
+          }
+      ]
+  }
+  end
 end
