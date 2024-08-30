@@ -161,14 +161,14 @@ describe "Vendors API" do
         post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_attrs) 
         
         expect(response).to_not be_successful
-        expect(response.status).to eq(422)
+        expect(response.status).to eq(400)
 
         data = JSON.parse(response.body, symbolize_names: true)[:errors]
         expect(data).to be_a(Array)
         expect(data.first[:detail]).to eq("Validation failed: Name can't be blank")
       end
 
-      xit "must have a contact_name" do 
+      it "must have a contact_name" do 
         vendor_attrs = ({
           name: "Some Name",
           description: "Some description that is longer",
@@ -181,12 +181,83 @@ describe "Vendors API" do
         post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_attrs) 
         
         expect(response).to_not be_successful
-        expect(response.status).to eq(404)
+        expect(response.status).to eq(400)
 
         data = JSON.parse(response.body, symbolize_names: true)[:errors]
         
         expect(data).to be_a(Array)
         expect(data.first[:detail]).to eq("Validation failed: Contact name can't be blank")
+      end
+    end
+  end
+
+  describe "update" do 
+    describe "happy paths" do 
+      it "can update a vendor" do
+        id = create(:vendor).id
+        previous_name = Vendor.last.name
+        vendor_params = { name: "Tabula Rasa" }
+        headers = { "CONTENT_TYPE" => "application/json" }
+  
+        patch "/api/v0/vendors/#{id}", headers: headers, params: JSON.generate({vendor: vendor_params})
+  
+        vendor = Vendor.find_by(id: id)
+        expect(response).to be_successful
+        expect(response.status).to eq(200)
+      end
+    end
+  
+    describe "sad paths" do
+      it "Must have a valid vendor.id" do 
+        id = create(:vendor).id
+        vendor_params = { contact_name: "Tabula Rasa" }
+        headers = { "CONTENT_TYPE" => "application/json" }
+  
+        patch "/api/v0/vendors/123123123123", headers: headers, params: JSON.generate({vendor: vendor_params})
+  
+        expect(response).to_not be_successful
+        expect(response.status).to eq(404)
+      end
+
+      it "Name can't be blank" do 
+        vendor = create(:vendor)
+        previous_name = Vendor.last.name
+        vendor_params = { name: "" }
+        headers = { "CONTENT_TYPE" => "application/json" }
+  
+        patch "/api/v0/vendors/123123123123", headers: headers, params: JSON.generate({vendor: vendor_params})
+        expect(response).to_not be_successful
+        expect(response.status).to eq(404)
+      end
+    end
+  end
+
+  describe "delete" do 
+    describe "happy paths" do 
+      it "deletes a vendor" do 
+        vendor1 = create(:vendor)
+        vendor2 = create(:vendor)
+
+        expect(Vendor.count).to eq(2)
+        headers = {"CONTENT_TYPE" => "application/json"}
+        
+        delete "/api/v0/vendors/#{vendor1.id}", headers: headers
+
+        expect(Vendor.count).to eq(1)
+        expect(response).to be_successful
+      end
+    end
+
+    describe "sad paths" do
+      it "Must have a valid vendor.id" do 
+        id = create(:vendor).id
+        vendor_params = { contact_name: "Tabula Rasa" }
+        headers = { "CONTENT_TYPE" => "application/json" }
+  
+        delete "/api/v0/vendors/123123123123", headers: headers
+  
+        expect(response).to_not be_successful
+        expect(response.status).to eq(404)
       end
     end
   end
