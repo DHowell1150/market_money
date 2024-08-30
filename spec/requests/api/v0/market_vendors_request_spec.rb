@@ -16,7 +16,7 @@ describe "market_vendors request" do
       headers = {"CONTENT_TYPE" => "application/json"}
       expect(market1.vendors.count).to eq(2)
 
-      post "/api/v0/market_vendors", headers: headers, params: JSON.generate(market_vendor_params: market_vendor_params)
+      post "/api/v0/market_vendors", headers: headers, params: JSON.generate(market_vendor_params)
       expect(response).to be_successful
       expect(response.status).to eq(201)
       
@@ -42,7 +42,7 @@ describe "market_vendors request" do
       })
       headers = {"CONTENT_TYPE" => "application/json"}
 
-      post "/api/v0/market_vendors", headers: headers, params: JSON.generate(market_vendor_params: market_vendor_params)
+      post "/api/v0/market_vendors", headers: headers, params: JSON.generate(market_vendor_params)
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
       
@@ -65,7 +65,7 @@ describe "market_vendors request" do
       })
       headers = {"CONTENT_TYPE" => "application/json"}
 
-      post "/api/v0/market_vendors", headers: headers, params: JSON.generate(market_vendor_params: market_vendor_params)
+      post "/api/v0/market_vendors", headers: headers, params: JSON.generate(market_vendor_params)
       expect(response).to_not be_successful
       expect(response.status).to eq(422)
       
@@ -89,7 +89,8 @@ describe "market_vendors request" do
       headers = {"CONTENT_TYPE" => "application/json"}
       expect(market1.vendors.count).to eq(2)
 
-      delete api_v0_market_vendor_path(market1), headers: headers, params: JSON.generate(market_vendor_params: market_vendor_params)
+      delete api_v0_market_vendor_path(market1), headers: headers, params: JSON.generate(market_vendor_params)
+      require 'pry'; binding.pry
       expect(response).to be_successful
       expect(response.status).to eq(204)
       
@@ -107,7 +108,7 @@ describe "market_vendors request" do
       })
       headers = {"CONTENT_TYPE" => "application/json"}
 
-      delete api_v0_market_vendor_path(market1), headers: headers, params: JSON.generate(market_vendor_params: market_vendor_params)
+      delete api_v0_market_vendor_path(market1), headers: headers, params: JSON.generate(market_vendor_params)
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
       
