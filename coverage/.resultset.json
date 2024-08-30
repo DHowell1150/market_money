@@ -190,14 +190,14 @@
         "lines": [
           1,
           1,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
           null,
           null
         ]
@@ -206,11 +206,11 @@
         "lines": [
           1,
           1,
-          2,
-          2,
-          2,
-          2,
-          2,
+          6,
+          6,
+          6,
+          6,
+          6,
           null,
           null
         ]
@@ -284,13 +284,13 @@
           1,
           null,
           1,
-          1,
-          1,
           null,
+          3,
+          2,
+          2,
+          2,
           1,
-          0,
           1,
-          0,
           null,
           null,
           null,
@@ -306,8 +306,68 @@
           1,
           null
         ]
+      },
+      "/Users/corybretsch/turing/mod_3/projects/market_money/app/serializers/market_vendor_serializer.rb": {
+        "lines": [
+          1,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/corybretsch/turing/mod_3/projects/market_money/app/serializers/error_serializer.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/corybretsch/turing/mod_3/projects/market_money/app/poros/error_message.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1724987128
+    "timestamp": 1724987950
   }
 }
