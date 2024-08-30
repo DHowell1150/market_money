@@ -10,6 +10,10 @@ class Api::V0::MarketVendorsController < ApplicationController
       render json: ErrorSerializer.new(ErrorMessage.new(exception.message, "blank")).market_not_found, status: 404
     end
   end
+
+  def destroy
+    
+  end
 end
 
 
