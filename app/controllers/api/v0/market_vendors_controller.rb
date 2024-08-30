@@ -1,5 +1,5 @@
 class Api::V0::MarketVendorsController < ApplicationController 
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found_response
+  # rescue_from ActiveRecord::RecordNotFound, with: :not_found_response
   def create
     market = Market.find(params[:market_vendor_params][:market_id])
     vendor = Vendor.find(params[:market_vendor_params][:vendor_id])
