@@ -53,7 +53,7 @@ describe "market_vendors request" do
   end
 
   describe "sad path 2" do 
-    it "can return error when invalid market id is passed" do 
+    it "can return error when market_vendor already exists" do 
       vendor1 = create(:vendor)
       market1 = create(:market)
       MarketVendor.create!(market: market1, vendor: vendor1)
