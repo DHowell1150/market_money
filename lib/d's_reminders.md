@@ -1,15 +1,11 @@
-- VENDOR UPDATE
-  - Request_spec 
-    - Happy paths passing
-    - Sad path passing
-    - Could come back and write more sad paths.
-  - Update controller action complete
-    - The rescue_from covered the Sad path exception
+- route:
+    get '/api/v0/markets/search', to: 'market_search#index'
 
-- VENDOR DELETE
-  - Destroy route
-  - Request_spec 
-    - Happy paths passing
-    - Sad path passing
+- spec:
+    spec/requests/api/v0/market_search_request_spec.rb
+    - Created markets with manual data
+    - FactoryBot created vendors
 
-
+- controller:
+    app/controllers/api/v0/search_controller
+    - show action since we're to only return one market
