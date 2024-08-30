@@ -32,4 +32,14 @@ class ErrorSerializer
       ]
   }
   end
+
+  def no_market_vendor(market, vendor)
+  {
+    "errors": [
+        {
+            "detail": "No MarketVendor with market_id=#{market} AND vendor_id=#{vendor} exists"
+        }
+    ]
+  }
+  end
 end

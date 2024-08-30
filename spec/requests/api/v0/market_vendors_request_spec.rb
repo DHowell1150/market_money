@@ -74,4 +74,46 @@ describe "market_vendors request" do
       expect(message).to eq("Validation failed: Market vendor asociation between market with market_id=#{market1.id} and vendor_id=#{vendor1.id} already exists")
     end
   end
+
+  describe "delete - happy path" do
+    it "can delete a market vendor relationship" do
+      vendor1 = create(:vendor)
+      vendor2 = create(:vendor)
+      market1 = create(:market)
+      MarketVendor.create!(market: market1, vendor: vendor1)
+      MarketVendor.create!(market: market1, vendor: vendor2)
+      market_vendor_params = ({
+                          market_id: market1.id,
+                          vendor_id: vendor2.id
+      })
+      headers = {"CONTENT_TYPE" => "application/json"}
+      expect(market1.vendors.count).to eq(2)
+
+      delete api_v0_market_vendor_path(market1), headers: headers, params: JSON.generate(market_vendor_params: market_vendor_params)
+      expect(response).to be_successful
+      expect(response.status).to eq(204)
+      
+      expect(market1.vendors.count).to eq(1)
+    end
+  end
+  
+  describe "delete - sad path" do
+    it "can return error when market vendor relationship does not exist" do
+      vendor1 = create(:vendor)
+      market1 = create(:market)
+      market_vendor_params = ({
+                          market_id: market1.id,
+                          vendor_id: vendor1.id
+      })
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      delete api_v0_market_vendor_path(market1), headers: headers, params: JSON.generate(market_vendor_params: market_vendor_params)
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
+      
+      message = JSON.parse(response.body, symbolize_names: true)[:errors].first[:detail]
+      
+      expect(message).to eq("No MarketVendor with market_id=#{market1.id} AND vendor_id=#{vendor1.id} exists")
+    end
+  end
 end
