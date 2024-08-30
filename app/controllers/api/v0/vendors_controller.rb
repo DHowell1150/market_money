@@ -12,7 +12,6 @@ class Api::V0::VendorsController < ApplicationController
 
   def create
     vendor = Vendor.new(vendor_params)
-
     begin vendor.save!
       render json: VendorSerializer.new(vendor)
     rescue ActiveRecord::RecordInvalid => exception
@@ -23,11 +22,13 @@ class Api::V0::VendorsController < ApplicationController
 
 def update
   vendor = Vendor.find(params[:id])
-  begin vendor.update(vendor_params)
-    render json: VendorSerializer.new(vendor)
-  rescue 
-    # render json: VendorSerializer.new(vendor)
-  end
+  vendor.update(vendor_params)
+  render json: VendorSerializer.new(vendor)
+end
+
+def destroy
+  vendor = Vendor.find(params[:id])
+  vendor.destroy
 end
 
   private
